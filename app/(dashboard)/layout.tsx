@@ -1,5 +1,7 @@
-import { AppSidebar } from "@/src/components/app-sidebar"
+"use client"
 
+import { Header } from "@/src/components/header"
+import { AppSidebar } from "@/src/components/app-sidebar"
 
 export default function DashboardLayout({
   children,
@@ -7,15 +9,14 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="dashboard-layout">
-      <div className="dashboard-main">
-        <div className="navbar">
-         
-        </div>
-        <div className="dashboard-content">
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      <div className="flex-1 flex">
+        <AppSidebar />
+        <main className="flex-1 p-6">
           {children}
-        </div>
+        </main>
       </div>
     </div>
   )
-} 
+}
