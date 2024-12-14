@@ -8,12 +8,19 @@ import {
   FileTextIcon, 
   AwardIcon,
   NetworkIcon,
-  ActivityIcon 
+  ActivityIcon,
+  SunIcon,
+  MoonIcon 
 } from "lucide-react"
 import Link from "next/link"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { useAuthStore } from '@/src/stores/authStore'
+import { useThemeStore } from '@/src/stores/themeStore'
 
 export function Header() {
+  const { user } = useAuthStore()
+  const { theme, toggleTheme } = useThemeStore()
+
   return (
     <header className="border-b h-14 px-4 flex items-center justify-between">
       <div className="flex items-center gap-4">
@@ -79,12 +86,20 @@ export function Header() {
       </div>
 
       <div className="flex items-center gap-4">
+        <Button variant="ghost" size="icon" onClick={toggleTheme}>
+          {theme === 'light' ? (
+            <MoonIcon className="h-5 w-5" />
+          ) : (
+            <SunIcon className="h-5 w-5" />
+          )}
+        </Button>
         <Button variant="ghost" size="icon">
           <SearchIcon className="h-5 w-5" />
         </Button>
         <Button variant="ghost" size="icon">
           <BellIcon className="h-5 w-5" />
         </Button>
+        <h2>{user?.nome}</h2>
         <Button
           variant="ghost"
           size="icon"

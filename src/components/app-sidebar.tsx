@@ -13,10 +13,7 @@ const recentProjects = [
 
 export function AppSidebar() {
   return (
-    <Sidebar className="w-64">
-      <SidebarHeader>
-        <h2 className="text-lg font-semibold">Projetos Recentes</h2>
-      </SidebarHeader>
+    <Sidebar>
       <SidebarContent>
         <div className="space-y-1">
           {recentProjects.map((project) => (

@@ -45,7 +45,6 @@ export const useAuthStore = create<AuthStore>((set) => ({
     try {
       const response = await api.post('/auth/login', { email, senha });
       const { access_token: token, usuario: user } = response.data;
-      console.log(token, user)
       localStorage.setItem('token', token);
       set({ user, isAuthenticated: true });
     } catch (error) {

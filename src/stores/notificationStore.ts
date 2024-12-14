@@ -10,6 +10,7 @@ interface Notification {
   tipo: NotificationType
   lida: boolean
   enviarEmail: boolean
+  dataCriacao: string
 }
 
 interface NotificationStore {
