@@ -1,7 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { RecentProjects } from "@/src/components/dashboard/recent-projects"
-import { RecentActivities } from "@/src/components/dashboard/recent-activities"
-import { DashboardStats } from "@/src/components/dashboard/dashboard-stats"
+
 
 export default function DashboardPage() {
   return (

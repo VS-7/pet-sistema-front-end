@@ -1,5 +1,5 @@
 import { AppSidebar } from "@/src/components/app-sidebar"
-import { DashboardNav } from "@/src/components/dashboard/dashboard-nav"
+
 
 export default function DashboardLayout({
   children,
@@ -10,7 +10,7 @@ export default function DashboardLayout({
     <div className="dashboard-layout">
       <div className="dashboard-main">
         <div className="navbar">
-          <DashboardNav />
+         
         </div>
         <div className="dashboard-content">
           {children}
