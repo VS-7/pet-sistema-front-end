@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useProjectStore } from "@/src/stores/projectStore"
 import { useDocumentStore } from "@/src/stores/documentStore"
 import { useCertificateStore } from "@/src/stores/certificateStore"

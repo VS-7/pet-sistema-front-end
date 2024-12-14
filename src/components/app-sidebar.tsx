@@ -19,7 +19,7 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
-} from "@/app/components/ui/sidebar"
+} from "@/components/ui/sidebar"
 import { useAuthStore } from "@/src/stores/authStore"
 
 const getNavItems = (userType: 'TUTOR' | 'PETIANO') => {

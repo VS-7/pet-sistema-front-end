@@ -3,12 +3,13 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Mail, Lock } from 'lucide-react'
-import { Button } from '@/app/components/ui/button'
-import { Input } from '@/app/components/ui/input'
-import { Card, CardHeader, CardContent, CardFooter } from '@/app/components/ui/card'
-import { Label } from '@/app/components/ui/label'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card'
+import { Label } from '@/components/ui/label'
 import { useAuthStore } from '@/src/stores/authStore'
 import Link from 'next/link'
+import { useToast } from '@/hooks/use-toast'
 
 export function LoginForm() {
   const [email, setEmail] = useState('')
@@ -16,16 +17,20 @@ export function LoginForm() {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const login = useAuthStore(state => state.login)
-
+  const { toast } = useToast()
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
     
     try {
       await login(email, password)
-      router.push('/dashboard')
-    } catch (error) {
-      // Você pode adicionar um toast aqui para mostrar o erro
+      
+    } catch (error: any) {
+      toast({
+        title: "Erro ao fazer login",
+        description: error.response?.data?.message || "Ocorreu um erro ao tentar fazer login",
+        variant: "destructive",
+      })
       console.error(error)
     } finally {
       setIsLoading(false)

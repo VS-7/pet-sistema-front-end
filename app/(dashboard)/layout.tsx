@@ -8,9 +8,6 @@ export default function DashboardLayout({
 }) {
   return (
     <div className="dashboard-layout">
-      <div className="sidebar-wrapper">
-        <AppSidebar />
-      </div>
       <div className="dashboard-main">
         <div className="navbar">
           <DashboardNav />

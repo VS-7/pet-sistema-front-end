@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
-import { ScrollArea } from "@/app/components/ui/scroll-area"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 

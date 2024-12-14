@@ -3,8 +3,8 @@
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useProjectStore } from "@/src/stores/projectStore"
-import { Button } from "@/app/components/ui/button"
-import { ScrollArea } from "@/app/components/ui/scroll-area"
+import { Button } from "@/components/ui/button"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 export function RecentProjects() {
   const router = useRouter()
