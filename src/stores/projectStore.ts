@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import api from '@/src/services/api';
-import { Project, PaginatedResponse, CreateProjectDTO } from '@/src/types';
+import { Project, PaginatedResponse, CreateProjectDTO, User } from '@/src/types';
 
 
 type ProjectStore = {
@@ -8,12 +8,15 @@ type ProjectStore = {
   loading: boolean;
   error: string | null;
   fetchProjects: () => Promise<void>;
+  getProjectById: (id: number) => Promise<Project>;
   createProject: (project: CreateProjectDTO) => Promise<void>
   updateProject: (id: number, project: Partial<Project>) => Promise<void>
   deleteProject: (id: number) => Promise<void>
+  getPetsByProject: (id: number) => Promise<User[]>;
+  getTutorByProject: (id: number) => Promise<User>;
 };
 
-export const useProjectStore = create<ProjectStore>((set) => ({
+export const useProjectStore = create<ProjectStore>((set, get) => ({
   projects: [],
   loading: false,
   error: null,
@@ -76,6 +79,33 @@ export const useProjectStore = create<ProjectStore>((set) => ({
       throw error
     } finally {
       set({ loading: false })
+    }
+  },
+
+  getProjectById: async (id: number) => {
+    try {
+      const response = await api.get<Project>(`/projetos/${id}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  getPetsByProject: async (id: number) => {
+    try {
+      const response = await api.get<User[]>(`/projetos/${id}/pets`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  getTutorByProject: async (id: number) => {
+    try {
+      const response = await api.get<User>(`/projetos/${id}/tutor`);
+      return response.data;
+    } catch (error) {
+      throw error;
     }
   },
 }));

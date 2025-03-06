@@ -16,6 +16,8 @@ import {
 } from "@/components/ui/select"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ProjectStatus } from "@/src/types"
+
+
 export default function NewProjectPage() {
   const router = useRouter()
   const { createProject, loading, error } = useProjectStore()

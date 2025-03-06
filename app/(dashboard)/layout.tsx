@@ -15,7 +15,7 @@ export default function DashboardLayout({
     <div className="min-h-screen flex flex-col">
       <Header />
       <div className="flex-1 flex">
-        {!isMobile && <AppSidebar />}
+        {/*{!isMobile && <AppSidebar />}*/}
         <main className="flex-1">
           <div className="mx-auto max-w-[1300px] px-6 py-6">
             {children}

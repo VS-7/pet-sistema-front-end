@@ -1,19 +1,14 @@
 import { create } from 'zustand';
 import api from '@/src/services/api';
-
-type User = {
-  id: number;
-  nome: string;
-  email: string;
-  tipo: 'TUTOR' | 'PETIANO';
-};
+import { User, UserType } from '@/src/types';
 
 type AuthStore = {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (email: string, senha: string) => Promise<void>;
-  register: (nome: string, email: string, senha: string, tipo: 'TUTOR' | 'PETIANO') => Promise<void>;
+  registerTutor: (nome: string, email: string, senha: string) => Promise<void>;
+  registerPetiano: (nome: string, email: string, senha: string) => Promise<void>;
   logout: () => void;
   checkAuth: () => Promise<boolean>;
 };
@@ -52,9 +47,27 @@ export const useAuthStore = create<AuthStore>((set) => ({
     }
   },
 
-  register: async (nome: string, email: string, senha: string, tipo: 'TUTOR' | 'PETIANO') => {
+  registerTutor: async (nome: string, email: string, senha: string) => {
     try {
-      await api.post('/auth/registrar', { nome, email, senha, tipo });
+      await api.post('/auth/registrar-tutor', {
+        nome,
+        email,
+        senha,
+        tipo: 'TUTOR' as UserType
+      });
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  registerPetiano: async (nome: string, email: string, senha: string) => {
+    try {
+      await api.post('/auth/registrar-petiano', {
+        nome,
+        email,
+        senha,
+        tipo: 'PETIANO' as UserType
+      });
     } catch (error) {
       throw error;
     }
