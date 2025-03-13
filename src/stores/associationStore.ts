@@ -55,7 +55,7 @@ export const useAssociationStore = create<AssociationStore>((set) => ({
     }
   },
 
-  deleteAssociation: async (id) => {
+  deleteAssociation: async (id) => {  
     try {
       await api.delete(`/associacoes/${id}`)
       set((state) => ({

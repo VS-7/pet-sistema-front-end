@@ -6,13 +6,25 @@ import {
   FolderIcon,  
   NetworkIcon,
   SunIcon,
-  MoonIcon 
+  MoonIcon,
+  Settings2Icon,
+  LogOutIcon,
+  UserIcon
 } from "lucide-react"
 import Link from "next/link"
 import { useThemeStore } from '@/src/stores/themeStore'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { useAuthStore } from '@/src/stores/authStore'
 
 export function Header() {
   const { theme, toggleTheme } = useThemeStore()
+  const { logout } = useAuthStore()
 
   return (
     <header className="border-b h-14 px-6 bg-white dark:bg-gray-900">
@@ -55,14 +67,33 @@ export function Header() {
             <span className="text-xs">Notificações</span>
           </Button>
 
-          <Button variant="ghost" size="sm" className="flex flex-col items-center h-auto py-1 min-w-[80px]">
-            <img
-              src="https://github.com/shadcn.png"
-              alt="Avatar"
-              className="h-6 w-6 rounded-full"
-            />
-            <span className="text-xs">Você</span>
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm" className="flex flex-col items-center h-auto py-1 min-w-[80px]">
+                <img
+                  src="https://github.com/shadcn.png"
+                  alt="Avatar"
+                  className="h-6 w-6 rounded-full"
+                />
+                <span className="text-xs">Você</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuItem>
+                <UserIcon className="mr-2 h-4 w-4" />
+                <span>Meu Perfil</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Settings2Icon className="mr-2 h-4 w-4" />
+                <span>Configurações</span>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="text-red-600" onClick={logout}>
+                <LogOutIcon className="mr-2 h-4 w-4" />
+                <span>Sair</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           <div className="h-8 w-[1px] bg-gray-300 dark:bg-gray-700 mx-2" />
 
