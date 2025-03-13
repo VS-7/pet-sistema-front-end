@@ -21,7 +21,7 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!isLoading) {
       if (!isAuthenticated && !publicRoutes.includes(pathname)) {
-        router.push('/login')
+        router.push('/')
       } else if (isAuthenticated && publicRoutes.includes(pathname)) {
         router.push('/dashboard')
       }
