@@ -8,7 +8,7 @@ type AuthStore = {
   isLoading: boolean;
   login: (email: string, senha: string) => Promise<void>;
   registerTutor: (nome: string, email: string, senha: string) => Promise<void>;
-  registerPetiano: (nome: string, email: string, senha: string) => Promise<void>;
+  registerPetiano: (nome: string, email: string, senha: string, petId?: number) => Promise<void>;
   logout: () => void;
   checkAuth: () => Promise<boolean>;
 };
@@ -60,13 +60,14 @@ export const useAuthStore = create<AuthStore>((set) => ({
     }
   },
 
-  registerPetiano: async (nome: string, email: string, senha: string) => {
+  registerPetiano: async (nome: string, email: string, senha: string, petId?: number) => {
     try {
       await api.post('/auth/registrar-petiano', {
         nome,
         email,
         senha,
-        tipo: 'PETIANO' as UserType
+        tipo: 'PETIANO' as UserType,
+        petId
       });
     } catch (error) {
       throw error;

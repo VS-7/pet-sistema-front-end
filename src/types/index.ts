@@ -37,6 +37,17 @@ export type CreateProjectDTO = {
   participantesIds: number[]
 }
 
+export type Pet = {
+  id: number;
+  nome: string;
+  codigo: string;
+  descricao: string;
+  tutor: User;
+  membros: User[];
+  dataCriacao: string;
+  dataAtualizacao?: string;
+}
+
 export type PaginatedResponse = {
   content: Project[];
   totalElements: number;
