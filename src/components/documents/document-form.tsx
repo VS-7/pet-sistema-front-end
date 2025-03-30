@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import { useRouter } from "next/navigation"
 
 interface DocumentFormProps {
   projectId: number
@@ -18,6 +19,7 @@ export function DocumentForm({ projectId, onSuccess }: DocumentFormProps) {
   const { createDocument } = useDocumentStore()
   const [loading, setLoading] = useState(false)
   const formRef = useRef<HTMLFormElement>(null)
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -28,13 +30,13 @@ export function DocumentForm({ projectId, onSuccess }: DocumentFormProps) {
       projetoId: projectId,
       titulo: formData.get('titulo') as string,
       tipo: formData.get('tipo') as DocumentType,
-      conteudo: formData.get('conteudo'),
+      conteudo: {},
     }
 
     try {
-      await createDocument(documentData)
+      const newDocument = await createDocument(documentData)
       formRef.current?.reset()
-      onSuccess?.()
+      router.push(`/documents/${newDocument.id}/edit`)
     } catch (error) {
       console.error('Erro ao criar documento:', error)
     } finally {
@@ -68,15 +70,6 @@ export function DocumentForm({ projectId, onSuccess }: DocumentFormProps) {
                 <SelectItem value="EXTENSAO">Extensão</SelectItem>
               </SelectContent>
             </Select>
-          </div>
-
-          <div>
-            <Textarea
-              name="conteudo"
-              placeholder="Conteúdo do documento"
-              required
-              rows={5}
-            />
           </div>
 
           <Button type="submit" disabled={loading}>

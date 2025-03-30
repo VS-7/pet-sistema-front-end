@@ -11,7 +11,7 @@ export function ProfileCard() {
   if (!user) return null
 
   return (
-    <Card className="max-w-[250px] overflow-hidden rounded-xl dark:bg-gray-900">
+    <Card className="overflow-hidden rounded-xl dark:bg-gray-900">
       <div className="h-16 bg-gradient-to-r from-blue-600 to-blue-400" />
       <CardHeader className="relative">
         <div className="absolute -top-10 left-4">

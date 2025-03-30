@@ -80,4 +80,83 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.ProseMirror {
+  padding: 1rem;
+  min-height: 297mm; /* Tamanho A4 */
+  width: 210mm; /* Tamanho A4 */
+  margin: 0 auto;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  > * + * {
+    margin-top: 0.75em;
+  }
+
+  h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+  }
+
+  p {
+    margin-bottom: 0.5em;
+    line-height: 1.6;
+  }
+
+  ul,
+  ol {
+    padding: 0 1rem;
+  }
+
+  table {
+    border-collapse: collapse;
+    margin: 0;
+    overflow: hidden;
+    table-layout: fixed;
+    width: 100%;
+
+    td,
+    th {
+      border: 1px solid #ced4da;
+      box-sizing: border-box;
+      min-width: 1em;
+      padding: 3px 5px;
+      position: relative;
+      vertical-align: top;
+
+      > * {
+        margin-bottom: 0;
+      }
+    }
+
+    th {
+      background-color: #f8f9fa;
+      font-weight: bold;
+      text-align: left;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.is-active {
+  background-color: #e9ecef;
+}
+
+@media print {
+  .ProseMirror {
+    box-shadow: none;
+  }
+}
+
 

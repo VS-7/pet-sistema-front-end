@@ -61,12 +61,12 @@ export default function DashboardPage() {
 
       <div className="pt-2">
         <div className="flex flex-col md:flex-row gap-6">
-          <div className="md:w-[250px] flex-shrink-0">
+          <div className=" flex-shrink-0">
             <ProfileCard />
           </div>
           
           <div className="flex-1">
-            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 xl:grid-cols-1">
+            <div className="grid gap-4 grid-cols-1 sm:grid-cols-1 xl:grid-cols-1">
               {projects.map((project) => (
                 <ProjectCard key={project.id} project={project} />
               ))}

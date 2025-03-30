@@ -8,7 +8,7 @@ interface DocumentStore {
   loading: boolean
   fetchDocuments: () => Promise<void>
   getDocumentById: (id: number) => Promise<Document>
-  createDocument: (document: Omit<Document, 'id'>) => Promise<void>
+  createDocument: (document: Omit<Document, 'id'>) => Promise<Document>
   updateDocument: (id: number, document: Partial<Document>) => Promise<void>
   deleteDocument: (id: number) => Promise<void>
 }
@@ -42,6 +42,7 @@ export const useDocumentStore = create<DocumentStore>((set, get) => ({
     try {
       const response = await api.post('/documentos', document)
       set((state) => ({ documents: [...state.documents, response.data] }))
+      return response.data
     } catch (error) {
       throw error
     }
