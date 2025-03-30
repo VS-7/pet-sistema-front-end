@@ -27,7 +27,7 @@ export function Header() {
   const { logout } = useAuthStore()
 
   return (
-    <header className="border-b h-14 px-6 bg-white dark:bg-gray-900">
+    <header className="fixed top-2 left-1/2 -translate-x-1/2 w-[98%] max-w-7xl border rounded-xl h-14 px-6 bg-card  z-1000">
       <div className="max-w-[1128px] mx-auto flex items-center justify-between h-full">
         <div className="flex items-center gap-2">
           <Link href="/dashboard" className="font-semibold text-xl mr-4">

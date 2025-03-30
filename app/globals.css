@@ -4,10 +4,10 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 33 33% 98%; /* #F4F2EE */
     --foreground: 222.2 84% 4.9%;
 
-    --card: 0 0% 100%;
+    --card: 0 0% 100%; /* white */
     --card-foreground: 222.2 84% 4.9%;
  
     --popover: 0 0% 100%;
@@ -36,33 +36,37 @@
   }
  
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 0 0% 0%; /* Pure black */
     --foreground: 210 40% 98%;
  
-    --card: 222.2 84% 4.9%;
+    --card: 220 13% 18%; /* Dark gray for components */
     --card-foreground: 210 40% 98%;
  
-    --popover: 222.2 84% 4.9%;
+    --popover: 220 13% 18%;
     --popover-foreground: 210 40% 98%;
  
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
  
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 220 13% 18%;
     --secondary-foreground: 210 40% 98%;
  
-    --muted: 217.2 32.6% 17.5%;
+    --muted: 220 13% 18%;
     --muted-foreground: 215 20.2% 65.1%;
  
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 220 13% 18%;
     --accent-foreground: 210 40% 98%;
  
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
  
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
+    --border: 217 19% 27%; /* Cor mais visível para bordas no dark mode */
+    --input: 220 13% 18%;
     --ring: 212.7 26.8% 83.9%;
+  }
+
+  main {
+    @apply pt-16; /* 96px = header height (56px) + top margin (16px) + extra space (24px) */
   }
 }
 
@@ -156,6 +160,12 @@
 @media print {
   .ProseMirror {
     box-shadow: none;
+  }
+}
+
+@layer components {
+  .main-container {
+    @apply pt-16;
   }
 }
 

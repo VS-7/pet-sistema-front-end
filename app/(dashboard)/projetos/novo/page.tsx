@@ -28,7 +28,7 @@ export default function NewProjectPage() {
   const [formData, setFormData] = useState({
     titulo: "",
     descricao: "",
-    status: "EM_DESENVOLVIMENTO",
+    status: "",
     participantesIds: [] as number[],
     petId: 0
   })
@@ -99,7 +99,7 @@ export default function NewProjectPage() {
                   <SelectValue placeholder="Selecione o PET" />
                 </SelectTrigger>
                 <SelectContent>
-                  {pets.map((pet) => (
+                  {pets.map((pet: Pet) => (
                     <SelectItem key={pet.id} value={pet.id.toString()}>
                       {pet.nome}
                     </SelectItem>
@@ -123,7 +123,7 @@ export default function NewProjectPage() {
                   <SelectValue placeholder="Selecione os participantes" />
                 </SelectTrigger>
                 <SelectContent>
-                  {pets.find(p => p.id === formData.petId)?.membros.map((membro) => (
+                  {pets.find((p: Pet) => p.id === formData.petId)?.membros.map((membro: User) => (
                     <SelectItem key={membro.id} value={membro.id.toString()}>
                       {membro.nome}
                     </SelectItem>
@@ -144,9 +144,7 @@ export default function NewProjectPage() {
                   <SelectValue placeholder="Selecione o status" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="EM_ANDAMENTO">
-                    Em Andamento
-                  </SelectItem>
+                  <SelectItem value="EM_ANDAMENTO">Em Andamento</SelectItem>
                   <SelectItem value="CONCLUIDO">Concluído</SelectItem>
                   <SelectItem value="CANCELADO">Cancelado</SelectItem>
                   <SelectItem value="SUSPENSO">Suspenso</SelectItem>

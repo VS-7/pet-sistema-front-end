@@ -226,7 +226,7 @@ export function DocumentEditor({ documentId }: DocumentEditorProps) {
   }
 
   return (
-    <div className={`editor-container ${settings.orientation}`}>
+    <div className="editor-container" data-orientation={settings.orientation}>
       <div className="floating-toolbar">
         <div className="toolbar-section">
           <Select
