@@ -35,11 +35,11 @@ export const usePetStore = create<PetStore>((set, get) => ({
   fetchPets: async () => {
     set({ loading: true });
     try {
-      const response = await api.get('/pets');
+      const response = await api.get<Pet[]>('/pets');
       set({ pets: response.data });
     } catch (error) {
-      set({ error: 'Erro ao buscar grupos PET' });
-      throw error;
+      console.error('Erro ao buscar PETs:', error);
+      set({ pets: [] });
     } finally {
       set({ loading: false });
     }

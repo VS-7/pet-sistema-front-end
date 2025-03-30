@@ -16,7 +16,7 @@ interface WelcomeDialogProps {
 
 export function WelcomeDialog({ open, onProceed }: WelcomeDialogProps) {
   return (
-    <Dialog open={open} onOpenChange={() => {}}>
+    <Dialog open={open} onOpenChange={() => {}} >
       <DialogContent className="sm:max-w-[425px]" >
         <DialogHeader>
           <DialogTitle>Bem-vindo ao PET Docs!</DialogTitle>

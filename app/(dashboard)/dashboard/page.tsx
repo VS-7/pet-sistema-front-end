@@ -6,33 +6,35 @@ import { useAuthStore } from "@/src/stores/authStore"
 import { usePetStore } from "@/src/stores/petStore"
 import { WelcomeDialog } from "@/src/components/dashboard/welcome-dialog"
 import { PetRegistrationDialog } from "@/src/components/dashboard/pet-registration-dialog"
+import { ProjectCard } from "@/src/components/dashboard/project-card"
+import { useProjectStore } from "@/src/stores/projectStore"
 
 export default function DashboardPage() {
   const { user } = useAuthStore()
-  const { pets, loading, fetchPets } = usePetStore()
+  const { pets, loading: petsLoading, fetchPets } = usePetStore()
+  const { projects, loading: projectsLoading, fetchProjects } = useProjectStore()
   const [isLoading, setIsLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
 
   useEffect(() => {
-    const loadPets = async () => {
+    const loadData = async () => {
       try {
-        await fetchPets()
+        if (user?.tipo === "TUTOR") {
+          await Promise.all([fetchPets(), fetchProjects()])
+        } else {
+          await fetchProjects()
+        }
       } catch (error) {
-        console.error('Erro ao carregar pets:', error)
+        console.error('Erro ao carregar dados:', error)
       } finally {
         setIsLoading(false)
       }
     }
 
-    if (user?.tipo === "TUTOR") {
-      loadPets()
-    } else {
-      setIsLoading(false)
-    }
-  }, [user, fetchPets])
+    loadData()
+  }, [user, fetchPets, fetchProjects])
 
-  // Aguarda o carregamento inicial
-  if (isLoading || loading) {
+  if (isLoading || petsLoading || projectsLoading) {
     return (
       <div className="flex items-center justify-center min-h-[80vh]">
         <p>Carregando...</p>
@@ -57,12 +59,20 @@ export default function DashboardPage() {
         onSuccess={() => setShowForm(false)}
       />
 
-      {/* Dashboard normal */}
-      <div className="space-y-6">
-        <div className="p-6">
-          <ProfileCard />
+      <div className="pt-2">
+        <div className="flex flex-col md:flex-row gap-6">
+          <div className="md:w-[250px] flex-shrink-0">
+            <ProfileCard />
+          </div>
+          
+          <div className="flex-1">
+            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 xl:grid-cols-1">
+              {projects.map((project) => (
+                <ProjectCard key={project.id} project={project} />
+              ))}
+            </div>
+          </div>
         </div>
-        {/* Adicione aqui os outros componentes do dashboard */}
       </div>
     </>
   )

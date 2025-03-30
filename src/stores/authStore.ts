@@ -6,6 +6,8 @@ type AuthStore = {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+
+  
   login: (email: string, senha: string) => Promise<void>;
   registerTutor: (nome: string, email: string, senha: string) => Promise<void>;
   registerPetiano: (nome: string, email: string, senha: string, petId?: number) => Promise<void>;

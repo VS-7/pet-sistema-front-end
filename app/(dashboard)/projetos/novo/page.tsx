@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useProjectStore } from "@/src/stores/projectStore"
 import { useAuthStore } from "@/src/stores/authStore"
@@ -15,20 +15,27 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ProjectStatus } from "@/src/types"
+import { ProjectStatus, Pet, User } from "@/src/types"
+import { usePetStore } from "@/src/stores/petStore"
 
 
 export default function NewProjectPage() {
   const router = useRouter()
   const { createProject, loading, error } = useProjectStore()
   const { user } = useAuthStore()
+  const { pets, fetchPets } = usePetStore()
 
   const [formData, setFormData] = useState({
     titulo: "",
     descricao: "",
     status: "EM_DESENVOLVIMENTO",
     participantesIds: [] as number[],
+    petId: 0
   })
+
+  useEffect(() => {
+    fetchPets()
+  }, [fetchPets])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -81,6 +88,51 @@ export default function NewProjectPage() {
             </div>
 
             <div className="space-y-2">
+              <label className="text-sm font-medium">PET</label>
+              <Select
+                value={formData.petId.toString()}
+                onValueChange={(value) =>
+                  setFormData({ ...formData, petId: parseInt(value) })
+                }
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Selecione o PET" />
+                </SelectTrigger>
+                <SelectContent>
+                  {pets.map((pet) => (
+                    <SelectItem key={pet.id} value={pet.id.toString()}>
+                      {pet.nome}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Participantes</label>
+              <Select
+                value={formData.participantesIds.join(",")}
+                onValueChange={(value) =>
+                  setFormData({
+                    ...formData,
+                    participantesIds: value.split(",").map(Number).filter(Boolean)
+                  })
+                }
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Selecione os participantes" />
+                </SelectTrigger>
+                <SelectContent>
+                  {pets.find(p => p.id === formData.petId)?.membros.map((membro) => (
+                    <SelectItem key={membro.id} value={membro.id.toString()}>
+                      {membro.nome}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
               <label className="text-sm font-medium">Status</label>
               <Select
                 value={formData.status}
@@ -92,11 +144,12 @@ export default function NewProjectPage() {
                   <SelectValue placeholder="Selecione o status" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="EM_DESENVOLVIMENTO">
-                    Em Desenvolvimento
+                  <SelectItem value="EM_ANDAMENTO">
+                    Em Andamento
                   </SelectItem>
                   <SelectItem value="CONCLUIDO">Concluído</SelectItem>
                   <SelectItem value="CANCELADO">Cancelado</SelectItem>
+                  <SelectItem value="SUSPENSO">Suspenso</SelectItem>
                 </SelectContent>
               </Select>
             </div>

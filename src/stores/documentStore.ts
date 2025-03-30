@@ -1,14 +1,7 @@
 import { create } from 'zustand'
 import api from '@/src/services/api'
-import { DocumentType } from '@/src/types'
+import { Document } from '@/src/types'
 
-interface Document {
-  id: number
-  projetoId: number
-  tipo: DocumentType
-  titulo: string
-  conteudo: any // JsonNode
-}
 
 interface DocumentStore {
   documents: Document[]

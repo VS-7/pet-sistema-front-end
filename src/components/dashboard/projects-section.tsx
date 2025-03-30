@@ -32,10 +32,12 @@ export function ProjectsSection() {
                   <div className="flex items-center justify-between">
                     <h3 className="font-medium">{project.titulo}</h3>
                     <span className={`text-xs px-2 py-1 rounded-full ${
-                      project.status === 'EM_DESENVOLVIMENTO' 
+                      project.status === 'EM_ANDAMENTO' 
                         ? 'bg-blue-100 text-blue-700'
                         : project.status === 'CONCLUIDO'
                         ? 'bg-green-100 text-green-700'
+                        : project.status === 'SUSPENSO'
+                        ? 'bg-yellow-100 text-yellow-700'
                         : 'bg-red-100 text-red-700'
                     }`}>
                       {project.status.replace('_', ' ')}

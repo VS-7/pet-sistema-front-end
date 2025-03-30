@@ -113,8 +113,6 @@ export function LoginForm() {
               {isLoading ? 'Entrando...' : 'Entrar'}
             </Button>
           </form>
-
-         
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ export type NotificationType =
   | 'ASSOCIACAO_CRIADA' 
   | 'MENSAGEM_SISTEMA' 
 
-export type ProjectStatus = 'EM_DESENVOLVIMENTO' | 'CONCLUIDO' | 'CANCELADO' | 'EM_REVISAO'
+export type ProjectStatus = 'EM_ANDAMENTO' | 'CONCLUIDO' | 'CANCELADO' | 'SUSPENSO'
 
 
 export type User = {
@@ -16,6 +16,7 @@ export type User = {
   nome: string
   email: string
   tipo: UserType
+  petId: number
 }
 
 export type Project = {
@@ -35,6 +36,7 @@ export type CreateProjectDTO = {
   status: ProjectStatus
   tutorId: number
   participantesIds: number[]
+  petId: number
 }
 
 export type Pet = {
